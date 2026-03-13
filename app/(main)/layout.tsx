@@ -103,7 +103,6 @@ export default function Layout({
                 <NavigationMenuLink
                   asChild
                   className={navigationMenuTriggerStyle()}
-                  active={isActive("/")}
                 >
                   <Link href="/setup/privatepractices">Form private practices</Link>
                 </NavigationMenuLink>

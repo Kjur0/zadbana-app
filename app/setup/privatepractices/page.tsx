@@ -16,10 +16,12 @@ import {
   FieldError,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { db } from "@/lib/firebase"
 import { collection, addDoc } from "firebase/firestore"
 import { toast } from "sonner"
-import { useForm } from "react-hook-form"
+import { useForm, Controller } from "react-hook-form"
 
 interface EmployerForm {
   imieUcznia: string
@@ -39,6 +41,7 @@ export default function RegisterEmployerForm() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<EmployerForm>({
     mode: "onChange",
@@ -170,24 +173,48 @@ export default function RegisterEmployerForm() {
             </Field>
             <Field>
               <FieldLabel>Czy firma wyraża zgodę na podpisanie umowy zgodnie z przedstawionym wzorem</FieldLabel>
-              <div>
-                <input {...register("umowa", { required: "Wybierz opcję" })} type="radio" value="TAK" id="umowaTak" />
-                <label htmlFor="umowaTak">TAK</label>
-                <input {...register("umowa", { required: "Wybierz opcję" })} type="radio" value="NIE" id="umowaNie" />
-                <label htmlFor="umowaNie">NIE</label>
-              </div>
+              <Controller
+                name="umowa"
+                control={control}
+                rules={{ required: "Wybierz opcję" }}
+                render={({ field }) => (
+                  <RadioGroup value={field.value} onValueChange={field.onChange}>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="TAK" id="umowaTak" />
+                      <Label htmlFor="umowaTak">TAK</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="NIE" id="umowaNie" />
+                      <Label htmlFor="umowaNie">NIE</Label>
+                    </div>
+                  </RadioGroup>
+                )}
+              />
               {errors.umowa && <FieldError>{errors.umowa.message}</FieldError>}
             </Field>
             <Field>
               <FieldLabel>Profil ucznia</FieldLabel>
-              <div>
-                <input {...register("profil", { required: "Wybierz profil" })} type="radio" value="Programista" id="programista" />
-                <label htmlFor="programista">Programista</label>
-                <input {...register("profil", { required: "Wybierz profil" })} type="radio" value="Informatyk" id="informatyk" />
-                <label htmlFor="informatyk">Informatyk</label>
-                <input {...register("profil", { required: "Wybierz profil" })} type="radio" value="Mechatronik" id="mechatronik" />
-                <label htmlFor="mechatronik">Mechatronik</label>
-              </div>
+              <Controller
+                name="profil"
+                control={control}
+                rules={{ required: "Wybierz profil" }}
+                render={({ field }) => (
+                  <RadioGroup value={field.value} onValueChange={field.onChange}>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Programista" id="programista" />
+                      <Label htmlFor="programista">Programista</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Informatyk" id="informatyk" />
+                      <Label htmlFor="informatyk">Informatyk</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="Mechatronik" id="mechatronik" />
+                      <Label htmlFor="mechatronik">Mechatronik</Label>
+                    </div>
+                  </RadioGroup>
+                )}
+              />
               {errors.profil && <FieldError>{errors.profil.message}</FieldError>}
             </Field>
           </FieldGroup>
