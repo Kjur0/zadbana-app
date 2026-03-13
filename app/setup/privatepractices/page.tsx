@@ -22,6 +22,7 @@ import { db } from "@/lib/firebase"
 import { collection, addDoc } from "firebase/firestore"
 import { toast } from "sonner"
 import { useForm, Controller } from "react-hook-form"
+import { useAuth } from "@/hooks/useAuth"
 
 interface EmployerForm {
   imieUcznia: string
@@ -38,6 +39,7 @@ interface EmployerForm {
 }
 
 export default function RegisterEmployerForm() {
+  const { user } = useAuth()
   const {
     register,
     handleSubmit,
@@ -61,9 +63,13 @@ export default function RegisterEmployerForm() {
   })
 
   const onSubmit = async (data: EmployerForm) => {
+    if (!user) {
+      toast.error("Musisz być zalogowany, aby wysłać formularz")
+      return
+    }
     try {
       await addDoc(collection(db, "employerForms"), data)
-      toast.success("Formularz wysłany pomyślnie!")
+      toast.success("Wysłano pomyślnie formularz zgłoszeniowy praktyk prywatnych")
     } catch (error) {
       toast.error("Błąd wysyłania formularza")
       console.error(error)

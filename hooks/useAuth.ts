@@ -1,6 +1,6 @@
-import { RefObject } from "react"
+import { RefObject, useEffect, useState } from "react"
 
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
@@ -57,4 +57,17 @@ export function useLogin(dialogCloseRef?: RefObject<HTMLButtonElement | null>) {
           }
         })
   }
+}
+
+export function useAuth() {
+  const [user, setUser] = useState<User | null>(null)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user)
+    })
+    return unsubscribe
+  }, [])
+
+  return { user }
 }
