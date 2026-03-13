@@ -104,6 +104,14 @@ export default function Layout({
                   asChild
                   className={navigationMenuTriggerStyle()}
                 >
+                  <Link href="/setup/privatepractices">Form private practices</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  asChild
+                  className={navigationMenuTriggerStyle()}
+                >
                   <Link href="/docs">Home</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
