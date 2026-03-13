@@ -28,7 +28,12 @@ import { errorsAdapter } from "@/lib/utils"
 import { BadgePlus, BadgeX } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Controller, useFieldArray, useForm } from "react-hook-form"
+import { useEffect } from "react"
 import * as setup from "@/lib/setup"
+import { db } from "@/lib/firebase"
+import { getDoc, doc, collection } from "firebase/firestore"
+import { watch } from "fs"
+import router from "next/router"
 
 interface SetupForm {
   schoolName: string
@@ -37,6 +42,13 @@ interface SetupForm {
 
 export default function Page() {
   const router = useRouter()
+
+  useEffect(() => {
+    getDoc(doc(collection(db, "config"), "config")).then((doc) => {
+      if (doc.exists() && doc.data()?.setupStep === 1) {
+      } else router.push("/setup")
+    })
+  }, [router])
 
   const {
     handleSubmit,
@@ -51,7 +63,6 @@ export default function Page() {
     },
     criteriaMode: "all",
   })
-
   const { fields, append, remove } = useFieldArray({
     name: "schoolDomains",
     control,

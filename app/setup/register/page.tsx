@@ -19,11 +19,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { auth, db } from "@/lib/firebase"
 import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   validatePassword,
 } from "firebase/auth"
-import { toast } from "sonner"
 import { Controller, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { collection, doc, getDoc } from "firebase/firestore"
@@ -58,14 +55,9 @@ export default function Page() {
   useEffect(() => {
     getDoc(doc(collection(db, "config"), "config")).then((doc) => {
       if (doc.exists() && doc.data()?.setupStep === 2) {
-        toast.promise(() => new Promise((resolve) => {}), {
-          loading: "Wdrażanie aplikacji",
-          error: "Błąd tworzenia konta",
-          success: () => "Stworzono konto",
-        })
       } else router.push("/setup")
     })
-  }, [])
+  }, [router])
 
   const submit = (data: RegisterForm) => {
     setup.step2(data).then(() => {

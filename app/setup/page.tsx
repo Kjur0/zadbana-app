@@ -127,8 +127,7 @@ export default function Page() {
   }, [])
   useEffect(() => {
     getDoc(doc(collection(db, "config"), "config")).then((doc) => {
-      let step = doc.data()?.setupStep
-      setSetupStep(step)
+      const step = doc.exists() ? doc.data()?.setupStep : 0
       switch (step) {
         case 0:
           setup.step0().then(() => {
@@ -144,9 +143,8 @@ export default function Page() {
         case 3:
           resolveStep4Ref.current?.()
           break
-        default:
-          setSetupStep(step)
       }
+      setSetupStep(step)
     })
   })
 
