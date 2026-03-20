@@ -40,7 +40,7 @@ export default function Page() {
   const {
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     control,
   } = useForm<RegisterForm>({
     mode: "onChange",
@@ -60,7 +60,7 @@ export default function Page() {
         toast.success("Konto zostało utworzone")
         router.push("/")
       })
-      .catch((error) => {})
+      .catch(() => {})
   }
 
   return (

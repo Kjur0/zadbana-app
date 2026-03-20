@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 
 import { User } from "firebase/auth"
 
-import { auth, getUserData } from "@/lib/firebase"
+import { auth, db, getUserData, UserData } from "@/lib/firebase"
 import { toast } from "sonner"
 
 import {
@@ -31,6 +31,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 import { Home, LogOut } from "lucide-react"
 import Link from "next/link"
+import { mock } from "@/lib/mock"
 
 const ThemeToggle = dynamic(
   () => import("@/components/theme-provider").then((m) => m.ThemeToggle),
@@ -47,6 +48,7 @@ export default function Layout({
   const pathname = usePathname()
   const isActive = (href: string) => pathname === href
   const [user, setUser] = useState<User | null>(null)
+  const [userData, setUserData] = useState<UserData | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(
@@ -54,8 +56,9 @@ export default function Layout({
       auth.onAuthStateChanged((user) => {
         setLoading(false)
         if (user) {
-          getUserData().then((data) => {
+          getUserData().then((userData) => {
             setUser(user)
+            setUserData(userData)
             toast.success("Zalogowano pomyślnie", {
               description: `Witaj z powrotem ${user.displayName}!`,
             })
@@ -75,7 +78,7 @@ export default function Layout({
         setUser(null)
         router.refresh()
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error("Nie można się wylogować", {
           description: "Spróbuj ponownie później",
         })
@@ -99,14 +102,6 @@ export default function Layout({
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  asChild
-                  className={navigationMenuTriggerStyle()}
-                >
-                  <Link href="/docs">Home</Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <div className="ml-auto flex items-center justify-end gap-2">
@@ -115,7 +110,7 @@ export default function Layout({
             {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost">{user.displayName}</Button>
+                  <Button variant="ghost">{userData?.fname}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuGroup>
