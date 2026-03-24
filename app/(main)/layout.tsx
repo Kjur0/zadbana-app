@@ -6,7 +6,7 @@ import dynamic from "next/dynamic"
 
 import { User } from "firebase/auth"
 
-import { auth, db, getUserData, UserData } from "@/lib/firebase"
+import { auth, getUserData, UserData } from "@/lib/firebase"
 import { toast } from "sonner"
 
 import {
@@ -31,7 +31,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 import { Home, LogOut } from "lucide-react"
 import Link from "next/link"
-import { mock } from "@/lib/mock"
 
 const ThemeToggle = dynamic(
   () => import("@/components/theme-provider").then((m) => m.ThemeToggle),

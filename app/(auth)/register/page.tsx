@@ -18,14 +18,10 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { auth, db } from "@/lib/firebase"
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  validatePassword,
-} from "firebase/auth"
+import { createUserWithEmailAndPassword, validatePassword } from "firebase/auth"
 import Link from "next/link"
 import { toast } from "sonner"
-import { Controller, MultipleFieldErrors, useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { collection, doc, getDoc } from "firebase/firestore"
 import { errorsAdapter } from "@/lib/utils"

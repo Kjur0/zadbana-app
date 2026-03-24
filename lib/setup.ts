@@ -1,9 +1,6 @@
-import { doc, collection, setDoc, updateDoc } from "firebase/firestore"
+import { doc, collection, setDoc } from "firebase/firestore"
 import { auth, db } from "./firebase"
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 const config = doc(collection(db, "config"), "config")
 

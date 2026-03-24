@@ -58,7 +58,7 @@ export default function RootLayout({
           },
         })
       })
-  }, [])
+  }, [router])
 
   return (
     <html

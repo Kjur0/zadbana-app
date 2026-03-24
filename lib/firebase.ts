@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getAuth, User, UserProfile } from "firebase/auth"
+import { getAuth, UserProfile } from "firebase/auth"
 import {
   collection,
   doc,

@@ -20,7 +20,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { H2 } from "@/components/ui/typography"
 import { db } from "@/lib/firebase"
-import { mock } from "@/lib/mock"
 import { collection, getDocs } from "firebase/firestore"
 import { Plus } from "lucide-react"
 import { use } from "react"
@@ -44,11 +43,7 @@ export default function Page() {
               {use(
                 getDocs(collection(db, "profiles", profile.id, "employers"))
               ).docs.map((employer) => (
-                <Item
-                  key={employer.id}
-                  variant="outline"
-                  className="h-40 md:w-60"
-                >
+                <Item key={employer.id} variant="outline">
                   <ItemContent>
                     <ItemTitle>{employer.data().name}</ItemTitle>
                     <ItemDescription>{employer.data().address}</ItemDescription>

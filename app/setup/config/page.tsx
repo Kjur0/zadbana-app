@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldSet,
   FieldLabel,
   FieldDescription,
   FieldGroup,
@@ -32,8 +31,6 @@ import { useEffect } from "react"
 import * as setup from "@/lib/setup"
 import { db } from "@/lib/firebase"
 import { getDoc, doc, collection } from "firebase/firestore"
-import { watch } from "fs"
-import router from "next/router"
 
 interface SetupForm {
   schoolName: string
@@ -50,12 +47,7 @@ export default function Page() {
     })
   }, [router])
 
-  const {
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    control,
-    watch,
-  } = useForm<SetupForm>({
+  const { handleSubmit, control, watch } = useForm<SetupForm>({
     mode: "onBlur",
     defaultValues: {
       schoolName: "",

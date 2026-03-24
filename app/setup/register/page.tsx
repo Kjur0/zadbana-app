@@ -18,9 +18,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { auth, db } from "@/lib/firebase"
-import {
-  validatePassword,
-} from "firebase/auth"
+import { validatePassword } from "firebase/auth"
 import { Controller, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { collection, doc, getDoc } from "firebase/firestore"
@@ -38,7 +36,7 @@ export default function Page() {
   const {
     handleSubmit,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     control,
   } = useForm<RegisterForm>({
     mode: "onChange",

@@ -1,5 +1,5 @@
 import { clsx, type ClassValue } from "clsx"
-import { FieldError, FieldErrors, MultipleFieldErrors } from "react-hook-form"
+import { MultipleFieldErrors } from "react-hook-form"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {

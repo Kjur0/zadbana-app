@@ -21,7 +21,7 @@ export default function Loading() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="loading1">
-            <ItemGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:place-content-center md:place-items-center">
+            <ItemGroup className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:place-content-center md:place-items-center lg:grid-cols-4">
               <Skeleton className="h-40 md:w-60" />
               <Skeleton className="h-40 md:w-60" />
               <Skeleton className="h-40 md:w-60" />

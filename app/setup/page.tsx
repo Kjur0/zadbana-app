@@ -30,18 +30,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Spinner } from "@/components/ui/spinner"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { useEffect, useRef, useState } from "react"
 import * as setup from "@/lib/setup"
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-  FieldSet,
-} from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 
 const firestoreRulesSetup =
   "rules_version = '2';\n\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    match /{document=**} {\n      allow read, write, update: if true;\n    }\n  }\n}"
@@ -177,20 +169,21 @@ export default function Page() {
                       </Link>
                     </li>
                     <li>
-                      Stwórz nowy projekt ("
-                      <InlineCode>Create a new Firebase project</InlineCode>")
+                      Stwórz nowy projekt (&ldquo;
+                      <InlineCode>Create a new Firebase project</InlineCode>
+                      &rdquo;)
                       <br />
                     </li>
                     <li>
-                      Stwórz nową aplikację ("
-                      <InlineCode>Add app</InlineCode>") i wybierz platformę
+                      Stwórz nową aplikację (&ldquo;
+                      <InlineCode>Add app</InlineCode>&rdquo;) i wybierz
+                      platformę
                       <InlineCode>Web</InlineCode>
                     </li>
                     <li>
-                      Skopiuj konfigurację Firebase ("
-                      <InlineCode>
-                        SDK setup and configuration
-                      </InlineCode>") <br />
+                      Skopiuj konfigurację Firebase (&ldquo;
+                      <InlineCode>SDK setup and configuration</InlineCode>
+                      &rdquo;) <br />
                       Opcję <InlineCode>Config</InlineCode> wklej{" "}
                       <Drawer>
                         <DrawerTrigger className="underline">
@@ -237,8 +230,8 @@ export default function Page() {
                       Wybierz opcję <InlineCode>Firestore</InlineCode>
                     </li>
                     <li>
-                      Stwórz bazę danych ("
-                      <InlineCode>Create database</InlineCode>") <br />
+                      Stwórz bazę danych (&ldquo;
+                      <InlineCode>Create database</InlineCode>&rdquo;) <br />
                       Ustawienia:
                       <List>
                         <li>
@@ -289,8 +282,9 @@ export default function Page() {
                     <li>
                       Wybierz opcję <InlineCode>Email/Password</InlineCode>
                       <br />
-                      Następnie uruchom ją ("<InlineCode>Enable</InlineCode>
-                      ")
+                      Następnie uruchom ją (&ldquo;
+                      <InlineCode>Enable</InlineCode>
+                      &rdquo;)
                     </li>
                     <li>
                       W sekcji <InlineCode>Settings</InlineCode>{" "}
