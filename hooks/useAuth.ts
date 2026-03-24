@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation"
 import { auth } from "@/lib/firebase"
 import { toast } from "sonner"
 
-export function useRegister() {}
-
 export function useLogin(dialogCloseRef?: RefObject<HTMLButtonElement | null>) {
   const router = useRouter()
 
